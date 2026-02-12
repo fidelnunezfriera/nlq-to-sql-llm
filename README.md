@@ -56,7 +56,7 @@ using a typed state model and explicit routing.
 - Python 3.11+
 - Flask
 - LangGraph
-- LangChain OpenAI
+- LangChain
 - PostgreSQL
 - Pydantic
 - python-dotenv
@@ -65,22 +65,22 @@ using a typed state model and explicit routing.
 
 ## Project structure
 
-app.py → Flask API entrypoint
-config.py → Environment configuration
-langgraph_builder.py → LangGraph pipeline
+app.py                  → Flask API entrypoint
+config.py               → Environment configuration
+langgraph_builder.py    → LangGraph pipeline
 
 modules/
-    extract_intent.py → Intent extraction module
-    generate_sql.py → SQL generation module
-    validate_sql.py → Validation module
-    execute_sql.py → Execution module
-
-    prompts/
-        intent_prompt.txt → Prompt used for intent extraction
-        sql_prompt.txt → Prompt used for SQL generation
+  extract_intent.py     → Intent extraction module
+  generate_sql.py       → SQL generation module
+  validate_sql.py       → Validation module
+  execute_sql.py        → Execution module
+  prompts/
+    intent_prompt.txt   → Prompt used for intent extraction
+    sql_prompt.txt      → Prompt used for SQL generation
 
 templates/
-    interface.html → User interface
+  interface.html        → User interface
+
 
 ---
 
