@@ -67,6 +67,7 @@ using a typed state model and explicit routing.
 
 ## Project structure
 
+```
 app.py                  → Flask API entrypoint
 config.py               → Environment configuration
 langgraph_builder.py    → LangGraph pipeline
@@ -82,7 +83,7 @@ modules/
 
 templates/
   interface.html        → User interface
-
+```
 
 ---
 
