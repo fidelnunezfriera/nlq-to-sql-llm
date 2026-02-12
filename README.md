@@ -92,11 +92,13 @@ templates/
 1. Clone the repository:
 
 git clone https://github.com/fidelnunezfriera/nlq-to-sql-llm.git
+
 cd nlq-to-sql-llm
 
 2. Create environment:
 
 python -m venv .venv
+
 .venv\Scripts\activate
 
 3. Install dependencies:
@@ -106,14 +108,14 @@ pip install -r requirements.txt
 4. Environment variables
 
 Create a .env file in the project root:
-
+```
 OPENAI_API_KEY=your_api_key
 DB_NAME=...
 DB_USER=...
 DB_PASSWORD=...
 DB_HOST=...
 DB_PORT=...
-
+```
 Or copy:
 
 .env.example → .env
