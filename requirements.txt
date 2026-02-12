@@ -1,0 +1,7 @@
+Flask==3.1.2
+flask-cors==6.0.2
+langchain-core==1.2.11
+langchain-openai==1.1.9
+langgraph==1.0.8
+psycopg2-binary==2.9.11
+python-dotenv==1.2.1

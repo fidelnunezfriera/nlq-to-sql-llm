@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>NLQ → SQL Assistant</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #chat-container {
+      width: 90%;
+      max-width: 600px;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      height: 90%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form, #inputArea {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    textarea {
+      width: 100%;
+      background-color: #2a2a2a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 1em;
+      resize: none;
+
+    }
+
+    button {
+      background-color: #3f51b5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    #chatBox {
+  flex: 1;
+  width: 97%;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 10px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  display: none;
+  flex-direction: column;
+}
+
+
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      background-color: #3f51b5;
+      align-self: flex-end;
+      text-align: left;
+    }
+
+    .bot-message {
+      background-color: #2a2a2a;
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    #inputArea {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    #chatInput {
+      flex: 1;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    #sendBtn {
+      margin-top: 0px;
+    }
+
+    .compact {
+    height: auto !important;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+    
+  </style>
+</head>
+<body>
+  <div id="chat-container" class="compact">
+    <h2>NLQ to SQL assistant</h2>
+
+    <form id="nlqForm">
+      <textarea id="nlqInput" rows="3" placeholder="Write your query..."></textarea><br>
+      <button type="submit">Send</button>
+    </form>
+
+    <div id="chatBox"></div>
+
+    <div id="inputArea">
+      <textarea id="chatInput" rows="3" placeholder="Write here..."></textarea>
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const nlqForm = document.getElementById("nlqForm");
+    const nlqInput = document.getElementById("nlqInput");
+    const chatBox = document.getElementById("chatBox");
+    const inputArea = document.getElementById("inputArea");
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+
+    const API_URL = '/api/query';
+
+    let chatStarted = false;
+
+    nlqInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        nlqForm.requestSubmit();  // Envía el formulario como si se pulsara el botón
+      }
+    });
+
+    nlqForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nlq = nlqInput.value.trim();
+      if (!nlq) return;
+
+      if (!chatStarted) {
+        // Primera vez: ocultar el formulario y mostrar el chat
+        nlqForm.style.display = "none";
+        chatBox.style.display = "flex";
+        inputArea.style.display = "flex";
+        document.getElementById("chat-container").classList.remove("compact");
+        chatStarted = true;
+      }
+
+      addMessage(nlq, 'user');
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query: nlq })
+      })
+      .then(response => response.json())
+      .then(data => {
+        addMessage(data.result, 'bot');
+      })
+      .catch(error => {
+        console.error('API error:', error);
+        addMessage("Error processing the query.", 'bot');
+      });
+
+      nlqInput.value = "";
+    });
+
+    sendBtn.addEventListener("click", async () => {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, 'user');
+      chatInput.value = "";
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: text }),
+        });
+
+        const data = await response.json();
+        addMessage(data.result, 'bot');
+
+      } catch (error) {
+        console.error("Error connecting to the server:", error);
+        addMessage("Error processing the query.", 'bot');
+      }
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = "message " + (sender === 'user' ? 'user-message' : 'bot-message');
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    chatInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault(); // Evita el salto de línea
+        sendBtn.click();        // Simula pulsar el botón de enviar
+      }
+    });
+
+  </script>
+</body>
+</html>

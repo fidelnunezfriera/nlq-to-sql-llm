@@ -1,0 +1,77 @@
+You are an intelligent system that helps interpret questions from farmers with limited semantic clarity.
+Extract the main intent of the following query as a clear and concise sentence that can help a database expert write an SQL query.
+Return ONLY the intent, without explanations or formatting.
+
+Query: {query}
+
+Use the following database schema to better understand the terms used in the query.
+
+Schema:
+Table: collar
+
+Field: "time"  
+Type: TEXT
+
+Field: "entityName"  
+Type: TEXT
+Description: Unique ID for each collar, always 2 uppercase letters followed by 3 digits (e.g., "AH306"). Case-sensitive. Each collar represents a different animal/cow, so if the query mentions "cow", "cows", "animal", "animals" or similar, it must be interpreted as referring to collars.
+
+Field: "scenario"  
+Type: TEXT
+
+Field: "provider"  
+Type: TEXT  
+
+Field: "service"  
+Type: TEXT
+
+Field: "latitude"  
+Type: NUMERIC
+
+Field: "longitude"  
+Type: NUMERIC
+
+Field: "altitude"  
+Type: NUMERIC
+
+Field: "accX"  
+Type: NUMERIC
+
+Field: "accY"  
+Type: NUMERIC
+
+Field: "accZ"  
+Type: NUMERIC
+
+Field: "temperature"  
+Type: NUMERIC
+
+Field: "temperatureAnomaly"  
+Type: BOOLEAN  
+Description: True if the recorded temperature is unusually high.
+
+Field: "activityAnomaly"  
+Type: BOOLEAN  
+Description: True if the collar detects abnormal movement patterns (e.g. moving too fast).
+
+Field: "distanceAnomaly"  
+Type: BOOLEAN  
+Description: True if the collar moved an unusually long distance in a short time.
+
+Field: "positionAnomaly"  
+Type: BOOLEAN  
+Description: True if the GPS data is invalid or erratic.
+
+Field: "locationAnomaly"  
+Type: BOOLEAN  
+Description: True if the collar is located outside its usual area of activity.
+
+Field: "resourceAlarm"  
+Type: BOOLEAN  
+Description: True if a resource-related alert was triggered (e.g. battery warning).
+
+Field: "sequenceNumber"  
+Type: INTEGER  
+Description: Order of the measurement within the device's timeline.
+
+### Response:
