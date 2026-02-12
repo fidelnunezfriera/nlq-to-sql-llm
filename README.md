@@ -44,18 +44,7 @@ This design separates reasoning, generation, validation, and execution to improv
 
 ## Architecture
 
-User NLQ
-↓
-Intent extraction (LLM)
-↓
-SQL generation (LLM)
-↓
-Validation
-↓
-Execution
-↓
-Result
-
+User NLQ → Intent extraction (LLM) → SQL generation (LLM) → Validation → Execution → Result
 
 The orchestration is implemented with **LangGraph**,
 using a typed state model and explicit routing.
