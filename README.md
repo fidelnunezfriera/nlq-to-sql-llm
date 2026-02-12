@@ -153,9 +153,11 @@ In the original context, the system was specialized for agricultural data, which
 
 If you use this work in academic research, please cite:
 
+```bibtex
 @thesis{nunezfriera2026nlqsql,
 author = {Fidel Núñez Friera},
 title = {Intelligent Modular System for Translating Natural Language Queries into SQL using LLMs},
 school = {Universidad Politécnica de Madrid},
 year = {2026},
 url = {https://oa.upm.es/93684/}
+```
