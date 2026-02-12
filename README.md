@@ -12,7 +12,7 @@ The architecture is modular and built using LangGraph to orchestrate LLM reasoni
  
 ## License
 
-This project is dual-licensed. See LICENSE file.
+This project is dual-licensed. See License file.
 
 ## Academic reference
 
