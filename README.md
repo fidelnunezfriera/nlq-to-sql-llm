@@ -148,3 +148,14 @@ However, the system architecture is database-agnostic and can be easily adapted 
 To apply the system to a different database, the prompts should be updated to explicitly describe the schema and domain context. The included prompts can be used as a reference template.
 
 In the original context, the system was specialized for agricultural data, which explains the farmer-oriented language in the intent prompt.
+
+## Citation
+
+If you use this work in academic research, please cite:
+
+@thesis{nunezfriera2026nlqsql,
+author = {Fidel Núñez Friera},
+title = {Intelligent Modular System for Translating Natural Language Queries into SQL using LLMs},
+school = {Universidad Politécnica de Madrid},
+year = {2026},
+url = {https://oa.upm.es/93684/}
