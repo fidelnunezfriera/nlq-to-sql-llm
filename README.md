@@ -142,8 +142,9 @@ Response:
 
 The prompts included in this repository are those specifically designed for the database used in the bachelor’s thesis.
 The original dataset cannot be distributed due to confidentiality constraints.
-However, the system architecture is database-agnostic and can be adapted to other PostgreSQL schemas.
+This repository does not include a database; users must provide their own PostgreSQL instance.
 
+However, the system architecture is database-agnostic and can be easily adapted to other PostgreSQL schemas.
 To apply the system to a different database, the prompts should be updated to explicitly describe the schema and domain context. The included prompts can be used as a reference template.
 
 In the original context, the system was specialized for agricultural data, which explains the farmer-oriented language in the intent prompt.
