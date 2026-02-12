@@ -89,23 +89,23 @@ templates/
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the repository**
 
 git clone https://github.com/fidelnunezfriera/nlq-to-sql-llm.git
 
 cd nlq-to-sql-llm
 
-2. Create environment:
+2. **Create environment**
 
 python -m venv .venv
 
 .venv\Scripts\activate
 
-3. Install dependencies:
+3. **Install dependencies**
 
 pip install -r requirements.txt
 
-4. Environment variables
+4. **Environment variables**
 
 Create a .env file in the project root:
 ```
@@ -120,7 +120,7 @@ Or copy:
 
 .env.example → .env
 
-5. Running the server
+5. **Running the server**
 
 python app.py
 
