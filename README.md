@@ -22,6 +22,12 @@ https://oa.upm.es/93684/
 
 This repository contains the implementation accompanying the archived manuscript.
 
+## Demo
+
+Watch demo video:
+
+https://youtu.be/Ah21gEbqxIg
+
 ## Overview
 
 The pipeline is composed of four main stages:
